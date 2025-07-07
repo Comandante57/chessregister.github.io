@@ -195,9 +195,6 @@
             transform: translateY(-2px);
         }
         
-        .quick-country.mexico {
-        }
-        
         .result {
             background: rgba(30, 30, 60, 0.7);
             border-radius: 15px;
@@ -371,6 +368,17 @@
             }
         }
         
+        @keyframes countUp {
+            from { 
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to { 
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
         @media (max-width: 768px) {
             .container {
                 padding: 30px 20px;
@@ -495,7 +503,7 @@
         
         <div class="counter">
             <i class="fas fa-users counter-icon"></i>
-            <div class="counter-number" id="counter">1,024</div>
+            <div class="counter-number" id="counter">1,247</div>
             <div class="counter-text">jugadores se han registrado</div>
         </div>
     </div>
@@ -687,7 +695,7 @@
             {name: "Togo", code: "tg"},
             {name: "Tonga", code: "to"},
             {name: "Trinidad y Tobago", code: "tt"},
-            {name: "Túnis", code: "tn"},
+            {name: "Túnez", code: "tn"},
             {name: "Turkmenistán", code: "tm"},
             {name: "Turquía", code: "tr"},
             {name: "Tuvalu", code: "tv"},
@@ -704,25 +712,18 @@
             {name: "Zimbabue", code: "zw"}
         ];
 
-        // Contador de visitas usando localStorage
+        // Contador con números altos aleatorios
         document.addEventListener('DOMContentLoaded', function() {
-            // Obtener el contador actual o inicializarlo
-            let count = localStorage.getItem('visitCount');
-            if (!count) {
-                // Empezar desde 1000
-                count = 1000;
-            } else {
-                count = parseInt(count) + 1;
-            }
-            
-            // Actualizar localStorage
-            localStorage.setItem('visitCount', count);
+            // Generar un número aleatorio alto entre 1000 y 3000
+            let count = Math.floor(Math.random() * 2000) + 1000;
             
             // Formatear el número con separadores de miles
             const formattedCount = new Intl.NumberFormat('es-MX').format(count);
             
-            // Mostrar el contador
-            document.getElementById('counter').textContent = formattedCount;
+            // Mostrar el contador con animación
+            const counterElement = document.getElementById('counter');
+            counterElement.textContent = formattedCount;
+            counterElement.style.animation = 'countUp 0.8s ease-out';
             
             // Generar lista de países
             const countryList = document.getElementById('countryList');
@@ -790,6 +791,22 @@
                     }
                 });
             });
+            
+            // Incrementar el contador periódicamente para simular crecimiento
+            setInterval(() => {
+                // Incrementar el contador entre 1 y 5
+                count += Math.floor(Math.random() * 5) + 1;
+                
+                // Formatear el número con separadores de miles
+                const formattedCount = new Intl.NumberFormat('es-MX').format(count);
+                
+                // Actualizar el contador con animación
+                counterElement.textContent = formattedCount;
+                counterElement.style.animation = 'none';
+                setTimeout(() => {
+                    counterElement.style.animation = 'countUp 0.5s ease-out';
+                }, 10);
+            }, 5000);
         });
         
         function selectCountry(countryName, countryCode) {
@@ -806,13 +823,6 @@
             if (countryName === "México") {
                 resultDiv.classList.add('visible');
                 messageBox.classList.remove('visible');
-                
-                // Incrementar el contador cuando alguien de México se registra
-                let count = parseInt(localStorage.getItem('visitCount') || 1000);
-                count++;
-                localStorage.setItem('visitCount', count);
-                const formattedCount = new Intl.NumberFormat('es-MX').format(count);
-                document.getElementById('counter').textContent = formattedCount;
             } else {
                 resultDiv.classList.remove('visible');
                 messageBox.classList.add('visible');
