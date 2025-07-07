@@ -195,6 +195,9 @@
             transform: translateY(-2px);
         }
         
+        .quick-country.mexico {
+        }
+        
         .result {
             background: rgba(30, 30, 60, 0.7);
             border-radius: 15px;
@@ -252,6 +255,7 @@
             background: rgba(20, 20, 50, 0.6);
             border-radius: 15px;
             font-size: 1.2rem;
+            position: relative;
         }
         
         .counter-number {
@@ -269,6 +273,15 @@
         .counter-text {
             color: var(--gray);
             font-size: 1.1rem;
+        }
+        
+        .counter-icon {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            font-size: 2rem;
+            color: var(--success);
+            animation: pulse 2s infinite;
         }
         
         .chess-pieces {
@@ -457,10 +470,10 @@
             </div>
             
             <div class="quick-countries">
-                <div class="quick-country" data-country="México">México</div>
                 <div class="quick-country" data-country="Argentina">Argentina</div>
                 <div class="quick-country" data-country="España">España</div>
                 <div class="quick-country" data-country="Colombia">Colombia</div>
+                <div class="quick-country mexico" data-country="México">México</div>
                 <div class="quick-country" data-country="Perú">Perú</div>
             </div>
         </div>
@@ -481,8 +494,9 @@
         </div>
         
         <div class="counter">
-            <div class="counter-number" id="counter">0</div>
-            <div class="counter-text">personas han iniciado su registro</div>
+            <i class="fas fa-users counter-icon"></i>
+            <div class="counter-number" id="counter">1,024</div>
+            <div class="counter-text">jugadores se han registrado</div>
         </div>
     </div>
 
@@ -673,7 +687,7 @@
             {name: "Togo", code: "tg"},
             {name: "Tonga", code: "to"},
             {name: "Trinidad y Tobago", code: "tt"},
-            {name: "Túnez", code: "tn"},
+            {name: "Túnis", code: "tn"},
             {name: "Turkmenistán", code: "tm"},
             {name: "Turquía", code: "tr"},
             {name: "Tuvalu", code: "tv"},
@@ -694,16 +708,21 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Obtener el contador actual o inicializarlo
             let count = localStorage.getItem('visitCount');
-            count = count ? parseInt(count) : 0;
-            
-            // Incrementar el contador
-            count++;
+            if (!count) {
+                // Empezar desde 1000
+                count = 1000;
+            } else {
+                count = parseInt(count) + 1;
+            }
             
             // Actualizar localStorage
             localStorage.setItem('visitCount', count);
             
+            // Formatear el número con separadores de miles
+            const formattedCount = new Intl.NumberFormat('es-MX').format(count);
+            
             // Mostrar el contador
-            document.getElementById('counter').textContent = count;
+            document.getElementById('counter').textContent = formattedCount;
             
             // Generar lista de países
             const countryList = document.getElementById('countryList');
@@ -787,6 +806,13 @@
             if (countryName === "México") {
                 resultDiv.classList.add('visible');
                 messageBox.classList.remove('visible');
+                
+                // Incrementar el contador cuando alguien de México se registra
+                let count = parseInt(localStorage.getItem('visitCount') || 1000);
+                count++;
+                localStorage.setItem('visitCount', count);
+                const formattedCount = new Intl.NumberFormat('es-MX').format(count);
+                document.getElementById('counter').textContent = formattedCount;
             } else {
                 resultDiv.classList.remove('visible');
                 messageBox.classList.add('visible');
