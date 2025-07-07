@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Únete al Grupo de Ajedrez | WhatsApp</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --dark: #0f172a;
+            --darker: #0a0f1f;
+            --light: #e2e8f0;
+            --gray: #94a3b8;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --card-bg: rgba(30, 41, 59, 0.9);
+            --card-border: rgba(255, 255, 255, 0.1);
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--darker), var(--dark));
+            color: var(--light);
+            min-height: 100vh;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            max-width: 800px;
+            padding: 0 20px;
+            z-index: 3;
+        }
+        
+        .logo {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            color: var(--success);
+            animation: pulse 2s infinite;
+        }
+        
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--gray);
+            font-weight: 300;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+        }
+        
+        .country-selector {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            position: relative;
+        }
+        
+        .search-container {
+            position: relative;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        
+        .search-container i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+            font-size: 1.2rem;
+        }
+        
+        .country-selector input {
+            width: 100%;
+            padding: 18px 20px 18px 50px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 12px;
+            background: rgba(20, 20, 50, 0.8);
+            color: var(--light);
+            appearance: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            border: 2px solid #334155;
+        }
+        
+        .country-selector input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.3);
+        }
+        
+        .country-selector input:hover {
+            background: rgba(30, 30, 70, 0.9);
+        }
+        
+        #countryList {
+            display: none;
+            max-height: 300px;
+            overflow-y: auto;
+            background: rgba(20, 20, 50, 0.95);
+            border-radius: 12px;
+            margin-top: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--card-border);
+        }
+        
+        .country-option {
+            padding: 15px 20px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+        }
+        
+        .country-option:last-child {
+            border-bottom: none;
+        }
+        
+        .country-option:hover {
+            background: rgba(106, 17, 203, 0.2);
+        }
+        
+        .country-flag {
+            width: 30px;
+            height: 20px;
+            margin-right: 15px;
+            border-radius: 3px;
+            object-fit: cover;
+        }
+        
+        .quick-countries {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .quick-country {
+            background: rgba(106, 17, 203, 0.2);
+            padding: 10px 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            border: 1px solid rgba(106, 17, 203, 0.5);
+        }
+        
+        .quick-country:hover {
+            background: rgba(106, 17, 203, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        .result {
+            background: rgba(30, 30, 60, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            border-left: 5px solid var(--primary);
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .result.visible {
+            display: block;
+        }
+        
+        .result h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--success);
+        }
+        
+        .whatsapp-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #25D366, #128C7E);
+            color: white;
+            padding: 16px 40px;
+            font-size: 1.3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            margin: 20px 0;
+            font-weight: 600;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
+        }
+        
+        .whatsapp-btn:active {
+            transform: translateY(1px);
+        }
+        
+        .whatsapp-btn i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+            vertical-align: middle;
+        }
+        
+        .counter {
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(20, 20, 50, 0.6);
+            border-radius: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .counter-number {
+            display: inline-block;
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #00c6ff, #0072ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 10px 0;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .counter-text {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+        
+        .chess-pieces {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            z-index: 1;
+            opacity: 0.1;
+        }
+        
+        .chess-piece {
+            font-size: 3rem;
+            margin: 0 10px;
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .chess-piece:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+        
+        .chess-piece:nth-child(3) {
+            animation-delay: 1s;
+        }
+        
+        .chess-piece:nth-child(4) {
+            animation-delay: 1.5s;
+        }
+        
+        .chess-piece:nth-child(5) {
+            animation-delay: 2s;
+        }
+        
+        .message-box {
+            background: rgba(245, 158, 11, 0.15);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 5px solid var(--warning);
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .message-box.visible {
+            display: block;
+        }
+        
+        .message-box h3 {
+            color: var(--warning);
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .country-selector input {
+                padding: 15px 15px 15px 45px;
+                font-size: 1rem;
+            }
+            
+            .whatsapp-btn {
+                padding: 14px 30px;
+                font-size: 1.1rem;
+            }
+            
+            .counter {
+                font-size: 1rem;
+            }
+            
+            .counter-number {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+                margin-bottom: 30px;
+            }
+            
+            .result h2 {
+                font-size: 1.6rem;
+            }
+            
+            .chess-piece {
+                font-size: 2rem;
+            }
+            
+            .quick-countries {
+                gap: 5px;
+            }
+            
+            .quick-country {
+                padding: 8px 12px;
+                font-size: 0.8rem;
+            }
+        }
+        
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            color: var(--gray);
+            font-size: 0.9rem;
+            z-index: 3;
+        }
+    </style>
+</head>
+<body>
+    <div class="chess-pieces">
+        <div class="chess-piece">♔</div>
+        <div class="chess-piece">♕</div>
+        <div class="chess-piece">♖</div>
+        <div class="chess-piece">♗</div>
+        <div class="chess-piece">♘</div>
+    </div>
+    
+    <div class="header">
+        <div class="logo">
+            <i class="fas fa-chess-knight"></i>
+        </div>
+        <h1>Chess Masters</h1>
+        <p class="subtitle">Únete a nuestra comunidad de ajedrez en WhatsApp</p>
+    </div>
+    
+    <div class="container">
+        <p class="subtitle">Selecciona de qué país eres para continuar con tu registro</p>
+        
+        <div class="country-selector">
+            <div class="search-container">
+                <i class="fas fa-search"></i>
+                <input type="text" id="countrySearch" placeholder="Busca tu país...">
+            </div>
+            <div id="countryList" class="country-list">
+                <!-- Los países se generarán dinámicamente con JavaScript -->
+            </div>
+            
+            <div class="quick-countries">
+                <div class="quick-country" data-country="México">México</div>
+                <div class="quick-country" data-country="Argentina">Argentina</div>
+                <div class="quick-country" data-country="España">España</div>
+                <div class="quick-country" data-country="Colombia">Colombia</div>
+                <div class="quick-country" data-country="Perú">Perú</div>
+            </div>
+        </div>
+        
+        <div class="result" id="result">
+            <h2>¡Felicidades!</h2>
+            <p>Puedes unirte a nuestro grupo de Chess Masters en WhatsApp</p>
+            <a href="https://chat.whatsapp.com/DuV58gF4KlKFQSRLENADmS?mode=ac_c&fbclid=PAZXh0bgNhZW0CMTEAAacNFSZNeoeo9CkhOV-w1waxxxVhztACwT5KiNYpt0V8vG0eM-uO82BEpvg2BQ_aem_V5C8EiIrCBNPUfCWFgSnrA" 
+               class="whatsapp-btn" target="_blank">
+                <i class="fab fa-whatsapp"></i> Unirse al grupo
+            </a>
+            <p>¡Prepárate para desafiar a otros jugadores y mejorar tu juego!</p>
+        </div>
+        
+        <div class="message-box" id="messageBox">
+            <h3>¡Pronto estaremos disponibles en tu país!</h3>
+            <p>Sigue nuestras redes sociales para actualizaciones.</p>
+        </div>
+        
+        <div class="counter">
+            <div class="counter-number" id="counter">0</div>
+            <div class="counter-text">personas han iniciado su registro</div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Chess Masters Community &copy; 2023 | Todos los derechos reservados</p>
+    </footer>
+
+    <script>
+        // Lista completa de países del mundo
+        const countries = [
+            {name: "Afganistán", code: "af"},
+            {name: "Albania", code: "al"},
+            {name: "Alemania", code: "de"},
+            {name: "Andorra", code: "ad"},
+            {name: "Angola", code: "ao"},
+            {name: "Antigua y Barbuda", code: "ag"},
+            {name: "Arabia Saudita", code: "sa"},
+            {name: "Argelia", code: "dz"},
+            {name: "Argentina", code: "ar"},
+            {name: "Armenia", code: "am"},
+            {name: "Australia", code: "au"},
+            {name: "Austria", code: "at"},
+            {name: "Azerbaiyán", code: "az"},
+            {name: "Bahamas", code: "bs"},
+            {name: "Bangladés", code: "bd"},
+            {name: "Barbados", code: "bb"},
+            {name: "Baréin", code: "bh"},
+            {name: "Bélgica", code: "be"},
+            {name: "Belice", code: "bz"},
+            {name: "Benín", code: "bj"},
+            {name: "Bielorrusia", code: "by"},
+            {name: "Birmania", code: "mm"},
+            {name: "Bolivia", code: "bo"},
+            {name: "Bosnia y Herzegovina", code: "ba"},
+            {name: "Botsuana", code: "bw"},
+            {name: "Brasil", code: "br"},
+            {name: "Brunéi", code: "bn"},
+            {name: "Bulgaria", code: "bg"},
+            {name: "Burkina Faso", code: "bf"},
+            {name: "Burundi", code: "bi"},
+            {name: "Bután", code: "bt"},
+            {name: "Cabo Verde", code: "cv"},
+            {name: "Camboya", code: "kh"},
+            {name: "Camerún", code: "cm"},
+            {name: "Canadá", code: "ca"},
+            {name: "Catar", code: "qa"},
+            {name: "Chad", code: "td"},
+            {name: "Chile", code: "cl"},
+            {name: "China", code: "cn"},
+            {name: "Chipre", code: "cy"},
+            {name: "Ciudad del Vaticano", code: "va"},
+            {name: "Colombia", code: "co"},
+            {name: "Comoras", code: "km"},
+            {name: "Corea del Norte", code: "kp"},
+            {name: "Corea del Sur", code: "kr"},
+            {name: "Costa de Marfil", code: "ci"},
+            {name: "Costa Rica", code: "cr"},
+            {name: "Croacia", code: "hr"},
+            {name: "Cuba", code: "cu"},
+            {name: "Dinamarca", code: "dk"},
+            {name: "Dominica", code: "dm"},
+            {name: "Ecuador", code: "ec"},
+            {name: "Egipto", code: "eg"},
+            {name: "El Salvador", code: "sv"},
+            {name: "Emiratos Árabes Unidos", code: "ae"},
+            {name: "Eritrea", code: "er"},
+            {name: "Eslovaquia", code: "sk"},
+            {name: "Eslovenia", code: "si"},
+            {name: "España", code: "es"},
+            {name: "Estados Unidos", code: "us"},
+            {name: "Estonia", code: "ee"},
+            {name: "Etiopía", code: "et"},
+            {name: "Filipinas", code: "ph"},
+            {name: "Finlandia", code: "fi"},
+            {name: "Fiyi", code: "fj"},
+            {name: "Francia", code: "fr"},
+            {name: "Gabón", code: "ga"},
+            {name: "Gambia", code: "gm"},
+            {name: "Georgia", code: "ge"},
+            {name: "Ghana", code: "gh"},
+            {name: "Granada", code: "gd"},
+            {name: "Grecia", code: "gr"},
+            {name: "Guatemala", code: "gt"},
+            {name: "Guinea", code: "gn"},
+            {name: "Guinea-Bisáu", code: "gw"},
+            {name: "Guinea Ecuatorial", code: "gq"},
+            {name: "Guyana", code: "gy"},
+            {name: "Haití", code: "ht"},
+            {name: "Honduras", code: "hn"},
+            {name: "Hungría", code: "hu"},
+            {name: "India", code: "in"},
+            {name: "Indonesia", code: "id"},
+            {name: "Irak", code: "iq"},
+            {name: "Irán", code: "ir"},
+            {name: "Irlanda", code: "ie"},
+            {name: "Islandia", code: "is"},
+            {name: "Islas Marshall", code: "mh"},
+            {name: "Islas Salomón", code: "sb"},
+            {name: "Israel", code: "il"},
+            {name: "Italia", code: "it"},
+            {name: "Jamaica", code: "jm"},
+            {name: "Japón", code: "jp"},
+            {name: "Jordania", code: "jo"},
+            {name: "Kazajistán", code: "kz"},
+            {name: "Kenia", code: "ke"},
+            {name: "Kirguistán", code: "kg"},
+            {name: "Kiribati", code: "ki"},
+            {name: "Kuwait", code: "kw"},
+            {name: "Laos", code: "la"},
+            {name: "Lesoto", code: "ls"},
+            {name: "Letonia", code: "lv"},
+            {name: "Líbano", code: "lb"},
+            {name: "Liberia", code: "lr"},
+            {name: "Libia", code: "ly"},
+            {name: "Liechtenstein", code: "li"},
+            {name: "Lituania", code: "lt"},
+            {name: "Luxemburgo", code: "lu"},
+            {name: "Macedonia del Norte", code: "mk"},
+            {name: "Madagascar", code: "mg"},
+            {name: "Malasia", code: "my"},
+            {name: "Malaui", code: "mw"},
+            {name: "Maldivas", code: "mv"},
+            {name: "Malí", code: "ml"},
+            {name: "Malta", code: "mt"},
+            {name: "Marruecos", code: "ma"},
+            {name: "Mauricio", code: "mu"},
+            {name: "Mauritania", code: "mr"},
+            {name: "México", code: "mx"},
+            {name: "Micronesia", code: "fm"},
+            {name: "Moldavia", code: "md"},
+            {name: "Mónaco", code: "mc"},
+            {name: "Mongolia", code: "mn"},
+            {name: "Montenegro", code: "me"},
+            {name: "Mozambique", code: "mz"},
+            {name: "Namibia", code: "na"},
+            {name: "Nauru", code: "nr"},
+            {name: "Nepal", code: "np"},
+            {name: "Nicaragua", code: "ni"},
+            {name: "Níger", code: "ne"},
+            {name: "Nigeria", code: "ng"},
+            {name: "Noruega", code: "no"},
+            {name: "Nueva Zelanda", code: "nz"},
+            {name: "Omán", code: "om"},
+            {name: "Países Bajos", code: "nl"},
+            {name: "Pakistán", code: "pk"},
+            {name: "Palaos", code: "pw"},
+            {name: "Panamá", code: "pa"},
+            {name: "Papúa Nueva Guinea", code: "pg"},
+            {name: "Paraguay", code: "py"},
+            {name: "Perú", code: "pe"},
+            {name: "Polonia", code: "pl"},
+            {name: "Portugal", code: "pt"},
+            {name: "Reino Unido", code: "gb"},
+            {name: "República Centroafricana", code: "cf"},
+            {name: "República Checa", code: "cz"},
+            {name: "República del Congo", code: "cg"},
+            {name: "República Democrática del Congo", code: "cd"},
+            {name: "República Dominicana", code: "do"},
+            {name: "Ruanda", code: "rw"},
+            {name: "Rumanía", code: "ro"},
+            {name: "Rusia", code: "ru"},
+            {name: "Samoa", code: "ws"},
+            {name: "San Cristóbal y Nieves", code: "kn"},
+            {name: "San Marino", code: "sm"},
+            {name: "San Vicente y las Granadinas", code: "vc"},
+            {name: "Santa Lucía", code: "lc"},
+            {name: "Santo Tomé y Príncipe", code: "st"},
+            {name: "Senegal", code: "sn"},
+            {name: "Serbia", code: "rs"},
+            {name: "Seychelles", code: "sc"},
+            {name: "Sierra Leona", code: "sl"},
+            {name: "Singapur", code: "sg"},
+            {name: "Siria", code: "sy"},
+            {name: "Somalia", code: "so"},
+            {name: "Sri Lanka", code: "lk"},
+            {name: "Suazilandia", code: "sz"},
+            {name: "Sudáfrica", code: "za"},
+            {name: "Sudán", code: "sd"},
+            {name: "Sudán del Sur", code: "ss"},
+            {name: "Suecia", code: "se"},
+            {name: "Suiza", code: "ch"},
+            {name: "Surinam", code: "sr"},
+            {name: "Tailandia", code: "th"},
+            {name: "Taiwán", code: "tw"},
+            {name: "Tanzania", code: "tz"},
+            {name: "Tayikistán", code: "tj"},
+            {name: "Timor Oriental", code: "tl"},
+            {name: "Togo", code: "tg"},
+            {name: "Tonga", code: "to"},
+            {name: "Trinidad y Tobago", code: "tt"},
+            {name: "Túnez", code: "tn"},
+            {name: "Turkmenistán", code: "tm"},
+            {name: "Turquía", code: "tr"},
+            {name: "Tuvalu", code: "tv"},
+            {name: "Ucrania", code: "ua"},
+            {name: "Uganda", code: "ug"},
+            {name: "Uruguay", code: "uy"},
+            {name: "Uzbekistán", code: "uz"},
+            {name: "Vanuatu", code: "vu"},
+            {name: "Venezuela", code: "ve"},
+            {name: "Vietnam", code: "vn"},
+            {name: "Yemen", code: "ye"},
+            {name: "Yibuti", code: "dj"},
+            {name: "Zambia", code: "zm"},
+            {name: "Zimbabue", code: "zw"}
+        ];
+
+        // Contador de visitas usando localStorage
+        document.addEventListener('DOMContentLoaded', function() {
+            // Obtener el contador actual o inicializarlo
+            let count = localStorage.getItem('visitCount');
+            count = count ? parseInt(count) : 0;
+            
+            // Incrementar el contador
+            count++;
+            
+            // Actualizar localStorage
+            localStorage.setItem('visitCount', count);
+            
+            // Mostrar el contador
+            document.getElementById('counter').textContent = count;
+            
+            // Generar lista de países
+            const countryList = document.getElementById('countryList');
+            countries.forEach(country => {
+                const option = document.createElement('div');
+                option.className = 'country-option';
+                option.dataset.country = country.name;
+                option.dataset.code = country.code;
+                
+                const flag = document.createElement('div');
+                flag.className = 'country-flag';
+                flag.style.backgroundImage = `url(https://flagcdn.com/32x24/${country.code}.png)`;
+                flag.style.backgroundSize = 'cover';
+                
+                const name = document.createElement('span');
+                name.textContent = country.name;
+                
+                option.appendChild(flag);
+                option.appendChild(name);
+                countryList.appendChild(option);
+                
+                // Evento de clic para seleccionar país
+                option.addEventListener('click', function() {
+                    selectCountry(country.name, country.code);
+                });
+            });
+            
+            // Evento de búsqueda
+            const searchInput = document.getElementById('countrySearch');
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const options = document.querySelectorAll('.country-option');
+                
+                if (searchTerm.length > 0) {
+                    countryList.style.display = 'block';
+                    
+                    options.forEach(option => {
+                        const countryName = option.dataset.country.toLowerCase();
+                        if (countryName.includes(searchTerm)) {
+                            option.style.display = 'flex';
+                        } else {
+                            option.style.display = 'none';
+                        }
+                    });
+                } else {
+                    countryList.style.display = 'none';
+                }
+            });
+            
+            // Ocultar lista al hacer clic fuera
+            document.addEventListener('click', function(e) {
+                if (!countryList.contains(e.target) && e.target !== searchInput) {
+                    countryList.style.display = 'none';
+                }
+            });
+            
+            // Eventos para países rápidos
+            const quickCountries = document.querySelectorAll('.quick-country');
+            quickCountries.forEach(country => {
+                country.addEventListener('click', function() {
+                    const countryName = this.dataset.country;
+                    const countryObj = countries.find(c => c.name === countryName);
+                    if (countryObj) {
+                        selectCountry(countryObj.name, countryObj.code);
+                    }
+                });
+            });
+        });
+        
+        function selectCountry(countryName, countryCode) {
+            const searchInput = document.getElementById('countrySearch');
+            const countryList = document.getElementById('countryList');
+            const resultDiv = document.getElementById('result');
+            const messageBox = document.getElementById('messageBox');
+            
+            // Actualizar campo de búsqueda
+            searchInput.value = countryName;
+            countryList.style.display = 'none';
+            
+            // Mostrar resultado según país
+            if (countryName === "México") {
+                resultDiv.classList.add('visible');
+                messageBox.classList.remove('visible');
+            } else {
+                resultDiv.classList.remove('visible');
+                messageBox.classList.add('visible');
+            }
+        }
+    </script>
+</body>
+</html>
