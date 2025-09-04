@@ -3,451 +3,829 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dos para Mate | Casino de Élite</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        // Configuración de Tailwind para colores, fuentes y animaciones personalizadas
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        dark: '#0a0f1f',
-                        'deep-purple': '#1e0a2e',
-                        'vibrant-green': '#00ff7f',
-                        'vibrant-gold': '#ffea00',
-                        'light-gray': '#E2E8F0',
-                        'mid-gray': '#4A5568',
-                        'dark-bg': '#0f0f20', // Un tono más oscuro para el fondo general
-                        'card-bg': 'rgba(30, 10, 46, 0.6)', // Fondo de tarjeta semi-transparente
-                        'glow-purple': '#4d1e8c',
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        display: ['Bebas Neue', 'sans-serif'],
-                    },
-                    animation: {
-                        fadeIn: 'fadeIn 1s ease-in-out',
-                        pulseSubtle: 'pulseSubtle 2s ease-in-out infinite',
-                        float: 'float 4s ease-in-out infinite',
-                        neonGlow: 'neonGlow 1.5s ease-in-out infinite alternate',
-                        glow: 'glow 2s ease-in-out infinite alternate',
-                    },
-                    keyframes: {
-                        fadeIn: {
-                            '0%': { opacity: 0, transform: 'translateY(20px)' },
-                            '100%': { opacity: 1, transform: 'translateY(0)' },
-                        },
-                        pulseSubtle: {
-                            '0%, 100%': { transform: 'scale(1)', boxShadow: '0 0 5px rgba(0, 255, 127, 0.4)' },
-                            '50%': { transform: 'scale(1.02)', boxShadow: '0 0 15px rgba(0, 255, 127, 0.8)' },
-                        },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0) scale(1)' },
-                            '50%': { transform: 'translateY(-15px) scale(1.05)' },
-                        },
-                        neonGlow: {
-                            '0%': { textShadow: '0 0 5px #ffea00, 0 0 10px #ffea00' },
-                            '100%': { textShadow: '0 0 10px #ffea00, 0 0 20px #ffea00' },
-                        },
-                        glow: {
-                            '0%, 100%': { boxShadow: '0 0 5px #4d1e8c, 0 0 10px #4d1e8c' },
-                            '50%': { boxShadow: '0 0 15px #4d1e8c, 0 0 25px #4d1e8c' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <!-- Google Fonts for a bold, casino-like feel -->
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome for icons -->
+    <title>PokerMasters</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Custom styles to achieve the futuristic, glowy look */
+        /* Estilos base y tipografía */
+        @import url('https://fonts.cdnfonts.com/css/helvetica-neue-9');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', sans-serif;
+        }
+        
         body {
-            background-color: #0A0F1F;
-            background-image: url("https://images.unsplash.com/photo-1549646452-f47209e7d9b9?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3");
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: #E2E8F0;
-            font-family: 'Inter', sans-serif;
+            background-color: #000000;
+            color: #e0e0e0;
+            line-height: 1.6;
+            position: relative;
             overflow-x: hidden;
+            font-weight: 400;
+        }
+        
+        /* Contenedores y secciones */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            padding: 30px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #2ecc71, #1abc9c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+        
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
             position: relative;
         }
-
-        .bg-overlay {
-            position: absolute;
+        
+        section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        /* Tipografía y colores */
+        h1, h2, h3 {
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(to right, #ffffff, #1abc9c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            color: #2ecc71;
+            letter-spacing: -0.5px;
+        }
+        
+        h3 {
+            font-size: 1.3rem;
+            color: #ffffff;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            color: #a0a0a0;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+        
+        .highlight {
+            color: #2ecc71;
+            font-weight: 500;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            color: #b0b0b0;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Tarjetas de beneficios */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .benefit-card {
+            background: rgba(20, 20, 25, 0.6);
+            border-radius: 16px;
+            padding: 30px 25px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border-color: rgba(46, 204, 113, 0.2);
+        }
+        
+        .benefit-icon {
+            font-size: 2rem;
+            color: #2ecc71;
+            margin-bottom: 20px;
+            background: rgba(46, 204, 113, 0.1);
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+        }
+        
+        .benefit-title {
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+        
+        .benefit-desc {
+            color: #a0a0a0;
+            font-size: 0.95rem;
+        }
+        
+        /* Sección de registro */
+        .registration-section {
+            background: rgba(20, 20, 25, 0.6);
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin: 50px auto;
+            max-width: 900px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #e0e0e0;
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group select {
+            background: rgba(30, 30, 40, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+            padding: 14px 20px;
+            border-radius: 10px;
+            width: 100%;
+            font-size: 1rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: rgba(46, 204, 113, 0.5);
+            box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.1);
+        }
+        
+        /* Botones de acción */
+        .btn {
+            background: linear-gradient(to right, #2ecc71, #1abc9c);
+            color: white;
+            border: none;
+            padding: 16px 35px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-top: 20px;
+            letter-spacing: 0.5px;
+            width: 100%;
+            max-width: 300px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(46, 204, 113, 0.25);
+            background: linear-gradient(to right, #34d56a, #20c997);
+        }
+        
+        /* Modal de confirmación */
+        .modal {
+            display: none;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(10, 15, 31, 0.95);
-            backdrop-filter: blur(2px);
-            z-index: 1;
-        }
-
-        .container {
-            z-index: 2;
-        }
-        
-        .card-container {
-            background: rgba(30, 10, 46, 0.6);
-            border: 2px solid #4d1e8c;
-            box-shadow: 0 0 15px rgba(77, 30, 140, 0.5);
-            transition: all 0.3s ease;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            padding: 20px;
         }
         
-        .card-container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 25px rgba(77, 30, 140, 0.8), 0 0 40px rgba(77, 30, 140, 0.3);
-        }
-
-        .glow-border {
+        .modal-content {
+            background: rgba(20, 20, 25, 0.95);
+            padding: 40px 30px;
+            border-radius: 20px;
+            max-width: 560px;
+            width: 100%;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.08);
             position: relative;
-            z-index: 10;
-        }
-
-        .glow-border::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            background: linear-gradient(45deg, #00ff7f, #ffea00, #4d1e8c);
-            background-size: 200% 200%;
-            animation: glow 2s ease-in-out infinite alternate;
-            z-index: -1;
-            filter: blur(8px);
-            opacity: 0.8;
-            border-radius: 1.5rem;
+            backdrop-filter: blur(15px);
         }
         
-        .glow-text {
-            color: #ffea00;
-            text-shadow: 0 0 5px #ffea00, 0 0 10px #ffea00;
-            animation: neonGlow 1.5s ease-in-out infinite alternate;
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: #a0a0a0;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            background: none;
+            border: none;
+        }
+        
+        .close-btn:hover {
+            color: #2ecc71;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 40px 0 20px;
+            text-align: center;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 25px 0;
+        }
+        
+        .footer-links a {
+            color: #a0a0a0;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #2ecc71;
+        }
+        
+        .copyright {
+            color: #808080;
+            font-size: 0.85rem;
+            margin-top: 25px;
+        }
+        
+        /* Animaciones */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+        
+        /* Efectos especiales */
+        .gradient-bg {
+            position: fixed;
+            top: -200px;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(46, 204, 113, 0.15) 0%, transparent 70%);
+            z-index: -1;
+        }
+        
+        .gradient-bg-2 {
+            position: absolute;
+            bottom: -200px;
+            left: -200px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(46, 204, 113, 0.1) 0%, transparent 70%);
+            z-index: -1;
+        }
+        
+        /* Selector de país */
+        .country-selector {
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .country-selector select {
+            background: rgba(30, 30, 40, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+            padding: 14px 20px;
+            border-radius: 10px;
+            font-size: 1rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
+            margin: 0 auto;
+            display: block;
+        }
+        
+        .country-selector select:focus {
+            outline: none;
+            border-color: rgba(46, 204, 113, 0.5);
+            box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.1);
+        }
+        
+        /* Mejoras de adaptabilidad para móviles */
+        @media (max-width: 768px) {
+            header {
+                padding: 20px 0;
+            }
+            
+            .logo {
+                font-size: 1.8rem;
+            }
+            
+            .hero {
+                padding: 60px 0 40px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.6rem;
+            }
+            
+            h3 {
+                font-size: 1.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            section {
+                padding: 40px 0;
+            }
+            
+            .registration-section {
+                padding: 30px 20px;
+                margin: 30px auto;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .benefit-card {
+                padding: 25px 20px;
+            }
+            
+            .modal-content {
+                padding: 30px 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .logo {
+                font-size: 1.6rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            h2 {
+                font-size: 1.4rem;
+            }
+            
+            .btn {
+                padding: 14px 25px;
+                font-size: 1rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 10px;
+            }
         }
 
-        .quick-country {
-            padding: 0.5rem;
-            border-radius: 0.75rem;
-            background: rgba(30, 10, 46, 0.5); /* Darker purple */
-            border: none;
-            cursor: pointer;
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2ecc71;
+            margin-bottom: 10px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 60px 0;
+            flex-wrap: wrap;
+        }
+
+        .stats-container {
+            gap: 30px;
+        }
+
+        .stats-container {
+            gap: 20px;
+        }
+        
+        .stat-number {
+            font-size: 1.8rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2ecc71;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: #a0a0a0;
+            font-size: 1rem;
+        }
+
+        .game-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #2ecc71;
+        }
+
+        .games-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .game-item {
+            text-align: center;
+            background: rgba(20, 20, 25, 0.6);
+            padding: 20px;
+            border-radius: 12px;
+            width: 180px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
         }
-        .quick-country:hover {
-            background: rgba(30, 10, 46, 0.8);
-            transform: scale(1.1);
-            box-shadow: 0 6px 12px rgba(0, 255, 127, 0.4);
-        }
-        .quick-country .flag-emoji {
-            font-size: 3.5rem; /* Increased to a larger size */
+
+        .game-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(46, 204, 113, 0.2);
         }
     </style>
 </head>
-<body class="flex flex-col items-center justify-center min-h-screen p-4 md:p-8">
-
-    <!-- Floating poker chips and cards for background effect -->
-    <div class="absolute inset-0 flex justify-around items-center z-0">
-        <svg class="floating-element poker-chip-svg w-24 h-24" style="animation-delay: 0s;">
-            <circle cx="50" cy="50" r="48" fill="#ffea00"/>
-            <path d="M50 20 L80 80 L20 80 Z" fill="#0A0F1F" />
-        </svg>
-        <i class="fas fa-dice floating-element text-light-gray text-8xl" style="animation-delay: 1.5s;"></i>
-        <i class="fas fa-crown floating-element text-vibrant-gold text-8xl" style="animation-delay: 3s;"></i>
-    </div>
-
-    <div class="bg-overlay"></div>
-
-    <div class="container w-full max-w-4xl bg-dark-bg bg-opacity-90 rounded-3xl border border-glow-purple/50 shadow-2xl p-6 sm:p-10 relative animate-fadeIn">
-        <header class="text-center mb-12">
-            <div class="text-7xl text-vibrant-gold mb-4 inline-block">
-                <i class="fas fa-chess-king animate-pulse"></i>
-            </div>
-            <h1 class="font-display text-4xl sm:text-6xl md:text-7xl font-bold text-vibrant-gold tracking-widest mb-2">
-                DOS PARA MATE
-            </h1>
-            <p class="text-light-gray text-base sm:text-lg mb-4 glow-text">
-                Tu entrada exclusiva al mundo del juego de élite.
-            </p>
-        </header>
-
-        <main class="text-center">
-            <!-- Marketing Section Refined -->
-            <div class="mb-12 p-6 rounded-2xl bg-card-bg card-container">
-                <h2 class="text-3xl font-bold text-vibrant-green mb-4">
-                    ¡La estrategia se une al éxito!
-                </h2>
-                <p class="text-lg text-light-gray mb-6 max-w-prose mx-auto">
-                    Descubre los secretos mejor guardados. Nuestros grupos de WhatsApp te conectan con los mejores jugadores para dominar el ajedrez, el póker y el blackjack.
-                </p>
-            </div>
+<body>
+    <div class="gradient-bg"></div>
+    <div class="gradient-bg-2"></div>
+    
+    <header>
+        <div class="container">
+            <div class="logo">PokerMasters</div>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Únete a la comunidad de apostadores profesionales</h1>
+            <p class="subtitle">Regístrate ahora y accede a nuestro grupo en donde podrás jugar Poker, Chess y Blackjack con los mejores jugadores del mundo.</p>
             
-            <!-- Live Counter Section -->
-            <div class="bg-card-bg rounded-2xl p-6 mb-12 card-container">
-                <p class="text-light-gray text-xl mb-2">Miembros activos en la comunidad</p>
-                <div class="flex items-center justify-center space-x-4">
-                    <i class="fas fa-users text-vibrant-gold text-4xl"></i>
-                    <span id="liveCounter" class="counter-number text-6xl md:text-7xl font-extrabold animate-pulse">1.500+</span>
-                </div>
-            </div>
-
-            <!-- Game Types Section -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-                <!-- Poker Section -->
-                <div class="p-6 rounded-2xl card-container animate-fadeIn" style="animation-delay: 0.2s;">
-                    <i class="fas fa-heart text-vibrant-gold text-5xl mb-4"></i>
-                    <h4 class="font-bold text-2xl mb-1 text-vibrant-green">Póker</h4>
-                    <p class="text-sm text-light-gray">El arte del engaño y la estrategia.</p>
-                </div>
-                <!-- Ajedrez Section -->
-                <div class="p-6 rounded-2xl card-container animate-fadeIn" style="animation-delay: 0.4s;">
-                    <i class="fas fa-chess-knight text-vibrant-gold text-5xl mb-4"></i>
-                    <h4 class="font-bold text-2xl mb-1 text-vibrant-green">Ajedrez</h4>
-                    <p class="text-sm text-light-gray">El juego mental por excelencia.</p>
-                </div>
-                <!-- Blackjack Section -->
-                <div class="p-6 rounded-2xl card-container animate-fadeIn" style="animation-delay: 0.6s;">
-                    <div class="text-vibrant-gold font-display text-5xl mb-4">21</div>
-                    <h4 class="font-bold text-2xl mb-1 text-vibrant-green">Blackjack</h4>
-                    <p class="text-sm text-light-gray">Riesgo, recompensa y habilidad.</p>
-                </div>
-            </div>
-
-            <!-- Message box for unavailable countries -->
-            <div class="unavailable-message-box hidden bg-deep-purple rounded-2xl p-6 border-l-4 border-red-500 shadow-md animate-fadeIn mb-8" id="unavailableMessageBox">
-                <h3 class="text-2xl font-bold text-red-500 mb-4">¡Atención!</h3>
-                <p class="text-lg text-light-gray">
-                    Lo sentimos, nuestro servicio aún no está disponible en tu país.
-                </p>
-            </div>
-            
-            <!-- Country Selector -->
             <div class="country-selector">
-                <p class="text-light-gray text-xl mb-6">
-                    Selecciona tu país para unirte a nuestra exclusiva comunidad.
-                </p>
-                <!-- Quick country buttons -->
-                <div class="flex flex-wrap justify-center gap-4 mb-6">
-                    <div class="quick-country" data-country="Argentina" data-country-code="ar">
-                        <span class="flag-emoji">🇦🇷</span>
+                <select id="countrySelect" onchange="checkCountry()">
+                    <option value="">Selecciona tu país</option>
+                    <option value="MX">México</option>
+                    <option value="AR">Argentina</option>
+                    <option value="CL">Chile</option>
+                    <option value="CO">Colombia</option>
+                    <option value="ES">España</option>
+                    <option value="US">Estados Unidos</option>
+                    <option value="PE">Perú</option>
+                    <option value="other">Otro país</option>
+                </select>
+            </div>
+            
+            <button class="btn" onclick="scrollToRegistration()">Registrarme ahora</button>
+        </div>
+    </section>
+    
+    <section>
+        <div class="container">
+            <div class="section-title">
+                <h2>Juegos disponibles</h2>
+                <p class="subtitle">Dominamos las estrategias más avanzadas en estos juegos de habilidad</p>
+            </div>
+            
+            <div class="games-container">
+                <div class="game-item fade-in">
+                    <div class="game-icon">
+                        <i class="fas fa-heart text-vibrant-gold text-5xl mb-4"></i>
                     </div>
-                    <div class="quick-country" data-country="España" data-country-code="es">
-                        <span class="flag-emoji">🇪🇸</span>
-                    </div>
-                    <div class="quick-country" data-country="Colombia" data-country-code="co">
-                        <span class="flag-emoji">🇨🇴</span>
-                    </div>
-                    <div class="quick-country" data-country="México" data-country-code="mx">
-                        <span class="flag-emoji">🇲🇽</span>
-                    </div>
-                    <div class="quick-country" data-country="Perú" data-country-code="pe">
-                        <span class="flag-emoji">🇵🇪</span>
-                    </div>
+                    <h3>Poker</h3>
+                    <p>Texas Hold'em y variantes</p>
                 </div>
-
-                <div class="relative">
-                    <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-light-gray"></i>
-                    <input type="text" id="countrySearch" placeholder="Busca tu país..."
-                           class="w-full bg-deep-purple/50 text-light-gray rounded-full py-4 pl-12 pr-4 border-2 border-vibrant-green focus:outline-none focus:ring-2 focus:ring-vibrant-green focus:border-transparent transition-all">
+                
+                <div class="game-item fade-in delay-1">
+                    <div class="game-icon">
+                        <i class="fas fa-chess"></i>
+                    </div>
+                    <h3>Chess</h3>
+                    <p>Ajedrez por apuestas</p>
                 </div>
-                <div id="countryList" class="hidden absolute left-0 right-0 max-h-64 overflow-y-auto bg-deep-purple rounded-xl shadow-lg mt-2 z-50 border border-vibrant-green/30">
-                    <!-- Countries will be dynamically populated here -->
+                
+                <div class="game-item fade-in delay-2">
+                    <div class="game-icon">
+                        <i class="fas fa-dice"></i>
+                    </div>
+                    <h3>Blackjack</h3>
+                    <p>21 profesional</p>
                 </div>
             </div>
-        </main>
-        
-        <footer class="mt-12 text-light-gray text-sm text-center">
-            <p>Dos para Mate &copy; 2024 | Todos los derechos reservados</p>
-        </footer>
+        </div>
+    </section>
+    
+    <section>
+        <div class="container">
+            <div class="section-title">
+                <h2>Beneficios exclusivos</h2>
+                <p class="subtitle">Ventajas de unirte a nuestra comunidad de apostadores profesionales</p>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card fade-in">
+                    <div class="benefit-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="benefit-title">Estrategias comprobadas</h3>
+                    <p class="benefit-desc">Accede a métodos probados que aumentan tus probabilidades de ganar en cada partida.</p>
+                </div>
+                
+                <div class="benefit-card fade-in delay-1">
+                    <div class="benefit-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="benefit-title">Comunidad activa</h3>
+                    <p class="benefit-desc">Conecta con más de 5,000 apostadores profesionales que comparten sus experiencias.</p>
+                </div>
+                
+                <div class="benefit-card fade-in delay-2">
+                    <div class="benefit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="benefit-title">Análisis en tiempo real</h3>
+                    <p class="benefit-desc">Recibe análisis detallados de tus jugadas y mejora tu estrategia continuamente.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="stats-container">
+                <div class="stat-item fade-in">
+                    <div class="stat-number">+5,000</div>
+                    <div class="stat-label">miembros activos</div>
+                </div>
+                <div class="stat-item fade-in">
+                    <div class="stat-number">+85%</div>
+                    <div class="stat-label">tasa de éxito</div>
+                </div>
+                <div class="stat-item fade-in">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">soporte y análisis</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="registration-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Formulario de registro</h2>
+                <p class="subtitle">Completa tus datos para unirte a nuestra comunidad exclusiva</p>
+            </div>
+            
+            <div class="registration-section">
+                <form id="registrationForm">
+                    <div class="form-group">
+                        <label for="fullName">Nombre completo</label>
+                        <input type="text" id="fullName" required placeholder="Ingresa tu nombre completo">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Correo electrónico</label>
+                        <input type="email" id="email" required placeholder="tu@email.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Número de teléfono</label>
+                        <input type="tel" id="phone" required placeholder="+52 123 456 7890">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="country">País</label>
+                        <select id="country" required>
+                            <option value="">Selecciona tu país</option>
+                            <option value="MX">México</option>
+                            <option value="AR">Argentina</option>
+                            <option value="CL">Chile</option>
+                            <option value="CO">Colombia</option>
+                            <option value="ES">España</option>
+                            <option value="US">Estados Unidos</option>
+                            <option value="PE">Perú</option>
+                            <option value="other">Otro país</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="game">Juego de interés principal</label>
+                        <select id="game" required>
+                            <option value="">Selecciona un juego</option>
+                            <option value="poker">Poker</option>
+                            <option value="chess">Chess</option>
+                            <option value="blackjack">Blackjack</option>
+                        </select>
+                    </div>
+                    
+                    <button type="button" class="btn" onclick="submitForm()">Completar registro</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <div class="modal" id="confirmationModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <h2>¡Registro exitoso!</h2>
+            <p>Te has registrado correctamente en nuestra comunidad de apostadores profesionales.</p>
+            <p>En breve recibirás un correo electrónico con las instrucciones para acceder a nuestros grupos exclusivos y recursos de estrategia.</p>
+            <button class="btn" onclick="closeModal()" style="margin-top: 20px;">Entendido</button>
+        </div>
     </div>
     
+    <footer>
+        <div class="container">
+            <div class="logo">PokerMasters</div>
+            <div class="footer-links">
+                <a href="#">Términos de servicio</a>
+                <a href="#">Política de privacidad</a>
+                <a href="#">FAQ</a>
+                <a href="#">Soporte</a>
+            </div>
+            <p class="copyright">© 2025 PokerMasters. Juego responsable. Prohibida la participación de menores de edad.</p>
+        </div>
+    </footer>
+    
     <script>
-        // Full array of countries of the world
-        const countries = [
-            {name: "Afganistán", code: "af"}, {name: "Albania", code: "al"}, {name: "Alemania", code: "de"},
-            {name: "Andorra", code: "ad"}, {name: "Angola", code: "ao"}, {name: "Antigua y Barbuda", code: "ag"},
-            {name: "Arabia Saudita", code: "sa"}, {name: "Argelia", code: "dz"}, {name: "Argentina", code: "ar"},
-            {name: "Armenia", code: "am"}, {name: "Australia", code: "au"}, {name: "Austria", code: "at"},
-            {name: "Azerbaiyán", code: "az"}, {name: "Bahamas", code: "bs"}, {name: "Bangladés", code: "bd"},
-            {name: "Barbados", code: "bb"}, {name: "Baréin", code: "bh"}, {name: "Bélgica", code: "be"},
-            {name: "Belice", code: "bz"}, {name: "Benín", code: "bj"}, {name: "Bielorrusia", code: "by"},
-            {name: "Birmania", code: "mm"}, {name: "Bolivia", code: "bo"}, {name: "Bosnia y Herzegovina", code: "ba"},
-            {name: "Botsuana", code: "bw"}, {name: "Brasil", code: "br"}, {name: "Brunéi", code: "bn"},
-            {name: "Bulgaria", code: "bg"}, {name: "Burkina Faso", code: "bf"}, {name: "Burundi", code: "bi"},
-            {name: "Bután", code: "bt"}, {name: "Cabo Verde", code: "cv"}, {name: "Camboya", code: "kh"},
-            {name: "Camerún", code: "cm"}, {name: "Canadá", code: "ca"}, {name: "Catar", code: "qa"},
-            {name: "Chad", code: "td"}, {name: "Chile", code: "cl"}, {name: "China", code: "cn"},
-            {name: "Chipre", code: "cy"}, {name: "Ciudad del Vaticano", code: "va"}, {name: "Colombia", code: "co"},
-            {name: "Comoras", code: "km"}, {name: "Corea del Norte", code: "kp"}, {name: "Corea del Sur", code: "kr"},
-            {name: "Costa de Marfil", code: "ci"}, {name: "Costa Rica", code: "cr"}, {name: "Croacia", code: "hr"},
-            {name: "Cuba", code: "cu"}, {name: "Dinamarca", code: "dk"}, {name: "Dominica", code: "dm"},
-            {name: "Ecuador", code: "ec"}, {name: "Egipto", code: "eg"}, {name: "El Salvador", code: "sv"},
-            {name: "Emiratos Árabes Unidos", code: "ae"}, {name: "Eritrea", code: "er"}, {name: "Eslovaquia", code: "sk"},
-            {name: "Eslovenia", code: "si"}, {name: "España", code: "es"}, {name: "Estados Unidos", code: "us"},
-            {name: "Estonia", code: "ee"}, {name: "Etiopía", code: "et"}, {name: "Filipinas", code: "ph"},
-            {name: "Finlandia", code: "fi"}, {name: "Fiyi", code: "fj"}, {name: "Francia", code: "fr"},
-            {name: "Gabón", code: "ga"}, {name: "Gambia", code: "gm"}, {name: "Georgia", code: "ge"},
-            {name: "Ghana", code: "gh"}, {name: "Granada", code: "gd"}, {name: "Grecia", code: "gr"},
-            {name: "Guatemala", code: "gt"}, {name: "Guinea", code: "gn"}, {name: "Guinea-Bisáu", code: "gw"},
-            {name: "Guinea Ecuatorial", code: "gq"}, {name: "Guyana", code: "gy"}, {name: "Haití", code: "ht"},
-            {name: "Honduras", code: "hn"}, {name: "Hungría", code: "hu"}, {name: "India", code: "in"},
-            {name: "Indonesia", code: "id"}, {name: "Irak", code: "iq"}, {name: "Irán", code: "ir"},
-            {name: "Irlanda", code: "ie"}, {name: "Islandia", code: "is"}, {name: "Islas Marshall", code: "mh"},
-            {name: "Islas Salomón", code: "sb"}, {name: "Israel", code: "il"}, {name: "Italia", code: "it"},
-            {name: "Jamaica", code: "jm"}, {name: "Japón", code: "jp"}, {name: "Jordania", code: "jo"},
-            {name: "Kazajistán", code: "kz"}, {name: "Kenia", code: "ke"}, {name: "Kirguistán", code: "kg"},
-            {name: "Kiribati", code: "ki"}, {name: "Kuwait", code: "kw"}, {name: "Laos", code: "la"},
-            {name: "Lesoto", code: "ls"}, {name: "Letonia", code: "lv"}, {name: "Líbano", code: "lb"},
-            {name: "Liberia", code: "lr"}, {name: "Libia", code: "ly"}, {name: "Liechtenstein", code: "li"},
-            {name: "Lituania", code: "lt"}, {name: "Luxemburgo", code: "lu"}, {name: "Macedonia del Norte", code: "mk"},
-            {name: "Madagascar", code: "mg"}, {name: "Malasia", code: "my"}, {name: "Malaui", code: "mw"},
-            {name: "Maldivas", code: "mv"}, {name: "Malí", code: "ml"}, {name: "Malta", code: "mt"},
-            {name: "Marruecos", code: "ma"}, {name: "Mauricio", code: "mu"}, {name: "Mauritania", code: "mr"},
-            {name: "México", code: "mx"}, {name: "Micronesia", code: "fm"}, {name: "Moldavia", code: "md"},
-            {name: "Mónaco", code: "mc"}, {name: "Mongolia", code: "mn"}, {name: "Montenegro", code: "me"},
-            {name: "Mozambique", code: "mz"}, {name: "Namibia", code: "na"}, {name: "Nauru", code: "nr"},
-            {name: "Nepal", code: "np"}, {name: "Nicaragua", code: "ni"}, {name: "Níger", code: "ne"},
-            {name: "Nigeria", code: "ng"}, {name: "Noruega", code: "no"}, {name: "Nueva Zelanda", code: "nz"},
-            {name: "Omán", code: "om"}, {name: "Países Bajos", code: "nl"}, {name: "Pakistán", code: "pk"},
-            {name: "Palaos", code: "pw"}, {name: "Panamá", code: "pa"}, {name: "Papúa Nueva Guinea", code: "pg"},
-            {name: "Paraguay", code: "py"}, {name: "Perú", code: "pe"}, {name: "Polonia", code: "pl"},
-            {name: "Portugal", code: "pt"}, {name: "Reino Unido", code: "gb"}, {name: "República Centroafricana", code: "cf"},
-            {name: "República Checa", code: "cz"}, {name: "República del Congo", code: "cg"}, {name: "República Democrática del Congo", code: "cd"},
-            {name: "República Dominicana", code: "do"}, {name: "Ruanda", code: "rw"}, {name: "Rumanía", code: "ro"},
-            {name: "Rusia", code: "ru"}, {name: "Samoa", code: "ws"}, {name: "San Cristóbal y Nieves", code: "kn"},
-            {name: "San Marino", code: "sm"}, {name: "San Vicente y las Granadinas", code: "vc"},
-            {name: "Santa Lucía", code: "lc"}, {name: "Santo Tomé y Príncipe", code: "st"},
-            {name: "Senegal", code: "sn"}, {name: "Serbia", code: "rs"}, {name: "Seychelles", code: "sc"},
-            {name: "Sierra Leona", code: "sl"}, {name: "Singapur", code: "sg"}, {name: "Siria", code: "sy"},
-            {name: "Somalia", code: "so"}, {name: "Sri Lanka", code: "lk"}, {name: "Suazilandia", code: "sz"},
-            {name: "Sudáfrica", code: "za"}, {name: "Sudán", code: "sd"}, {name: "Sudán del Sur", code: "ss"},
-            {name: "Suecia", code: "se"}, {name: "Suiza", code: "ch"}, {name: "Surinam", code: "sr"},
-            {name: "Tailandia", code: "th"}, {name: "Taiwán", code: "tw"}, {name: "Tanzania", code: "tz"},
-            {name: "Tayikistán", code: "tj"}, {name: "Timor Oriental", code: "tl"}, {name: "Togo", code: "tg"},
-            {name: "Tonga", code: "to"}, {name: "Trinidad y Tobago", code: "tt"}, {name: "Túnez", code: "tn"},
-            {name: "Turkmenistán", code: "tm"}, {name: "Turquía", code: "tr"}, {name: "Tuvalu", code: "tv"},
-            {name: "Ucrania", code: "ua"}, {name: "Uganda", code: "ug"}, {name: "Uruguay", code: "uy"},
-            {name: "Uzbekistán", code: "uz"}, {name: "Vanuatu", code: "vu"}, {name: "Venezuela", code: "ve"},
-            {name: "Vietnam", code: "vn"}, {name: "Yemen", code: "ye"}, {name: "Yibuti", code: "dj"},
-            {name: "Zambia", code: "zm"}, {name: "Zimbabue", code: "zw"}
-        ];
-        
-        // Function to get the flag emoji from a two-letter country code
-        function getFlagEmoji(countryCode) {
-            const codePoints = countryCode
-                .toUpperCase()
-                .split('')
-                .map(char => 127397 + char.charCodeAt());
-            return String.fromCodePoint(...codePoints);
+        // Funcionalidad del modal
+        function openModal() {
+            document.getElementById('confirmationModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         }
-
-        // Event listener for dynamic behavior
+        
+        function closeModal() {
+            document.getElementById('confirmationModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Cerrar modal al hacer clic fuera del contenido
+        window.onclick = function(event) {
+            const modal = document.getElementById('confirmationModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+        
+        // Función para hacer scroll a la sección de registro
+        function scrollToRegistration() {
+            document.getElementById('registration-section').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+        
+        // Función para verificar el país seleccionado
+        function checkCountry() {
+            const countrySelect = document.getElementById('countrySelect');
+            const selectedCountry = countrySelect.value;
+            
+            if (selectedCountry === 'MX') {
+                window.location.href = 'https://chat.whatsapp.com/DuV58gF4KlKFQSRLENADmS';
+            }
+        }
+        
+        // Función para enviar el formulario
+        function submitForm() {
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const country = document.getElementById('country').value;
+            const game = document.getElementById('game').value;
+            
+            if (fullName && email && phone && country && game) {
+                openModal();
+                document.getElementById('registrationForm').reset();
+            } else {
+                alert('Por favor, completa todos los campos del formulario.');
+            }
+        }
+        
+        // Efecto de aparición al hacer scroll
         document.addEventListener('DOMContentLoaded', function() {
-            const countryList = document.getElementById('countryList');
-            const searchInput = document.getElementById('countrySearch');
-            const unavailableMessageBox = document.getElementById('unavailableMessageBox');
-            const quickCountries = document.querySelectorAll('.quick-country');
-            const liveCounter = document.getElementById('liveCounter');
-            
-            // Initial count for the live counter
-            let count = 1500;
-            const whatsappLink = "https://chat.whatsapp.com/DuV58gF4KlKFQSRLENADmS";
-            
-            // Function to generate the country list
-            function generateCountryList() {
-                countryList.innerHTML = ''; // Clear previous list
-                countries.forEach(country => {
-                    const option = document.createElement('div');
-                    option.className = 'flex items-center px-6 py-3 cursor-pointer hover:bg-deep-purple transition-colors border-b border-gray-700 last:border-b-0';
-                    option.dataset.country = country.name;
-                    option.dataset.code = country.code;
-
-                    const emoji = document.createElement('span');
-                    emoji.textContent = getFlagEmoji(country.code);
-                    emoji.className = 'flag-emoji mr-3';
-
-                    const name = document.createElement('span');
-                    name.textContent = country.name;
-                    name.className = 'text-light-gray';
-
-                    option.appendChild(emoji);
-                    option.appendChild(name);
-                    countryList.appendChild(option);
-                    
-                    option.addEventListener('click', function() {
-                        selectCountry(country.name);
-                    });
-                });
-            }
-
-            // Function to handle country selection
-            function selectCountry(countryName) {
-                searchInput.value = countryName;
-                countryList.classList.add('hidden');
-                
-                // Check if the selected country is Mexico
-                if (countryName === "México") {
-                    // Redirect to the WhatsApp link immediately
-                    window.location.href = whatsappLink;
-                } else {
-                    // Show the unavailable message for any other country
-                    unavailableMessageBox.classList.remove('hidden');
-                    unavailableMessageBox.classList.add('flex');
-                }
-            }
-
-            // Event listener for search input
-            searchInput.addEventListener('input', function() {
-                const searchTerm = this.value.toLowerCase();
-                const options = countryList.querySelectorAll('div');
-                
-                // Hide the message box if the user starts typing again
-                unavailableMessageBox.classList.add('hidden');
-
-                if (searchTerm.length > 0) {
-                    countryList.classList.remove('hidden');
-                    options.forEach(option => {
-                        const countryName = option.dataset.country.toLowerCase();
-                        if (countryName.includes(searchTerm)) {
-                            option.style.display = 'flex';
-                        } else {
-                            option.style.display = 'none';
-                        }
-                    });
-                } else {
-                    countryList.classList.add('hidden');
-                }
-            });
-            
-            // Hide list and message box when clicking outside
-            document.addEventListener('click', function(e) {
-                if (!countryList.contains(e.target) && e.target !== searchInput) {
-                    countryList.classList.add('hidden');
-                }
-            });
-            
-            // Event listeners for quick countries
-            quickCountries.forEach(country => {
-                country.addEventListener('click', function() {
-                    const countryName = this.getAttribute('data-country');
-                    // Hide the message box before a new selection
-                    unavailableMessageBox.classList.add('hidden');
-                    selectCountry(countryName);
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
                 });
             });
-
-            // Live counter update logic
-            setInterval(() => {
-                const increment = Math.floor(Math.random() * 5) + 1; // Increment by 1-5
-                count += increment;
-                liveCounter.textContent = new Intl.NumberFormat('es-MX').format(count) + '+';
-            }, 5000);
-
-            // Initial generation of country list
-            generateCountryList();
+            
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Sincronizar selección de país entre el selector principal y el del formulario
+            const countrySelectMain = document.getElementById('countrySelect');
+            const countrySelectForm = document.getElementById('country');
+            
+            countrySelectMain.addEventListener('change', function() {
+                countrySelectForm.value = this.value;
+            });
+            
+            countrySelectForm.addEventListener('change', function() {
+                countrySelectMain.value = this.value;
+                checkCountry();
+            });
         });
     </script>
 </body>
